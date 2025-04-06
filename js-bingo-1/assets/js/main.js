@@ -18,7 +18,14 @@ const userNumbers = [];
 const computerNumbers = [];
 
 const btnStartGame = document.getElementById('startGame');
+const btnNextTurn = document.getElementById('nextTurn');
+
+
 btnStartGame.addEventListener('click', ()=> {
+    console.clear();
+
+    resetGameData();
+
     // console.debug("GENERO PER UTENTE")
     generateBingoTable(userNumbers, "user");
     console.debug("userNumbers:")
@@ -27,11 +34,12 @@ btnStartGame.addEventListener('click', ()=> {
     generateBingoTable(computerNumbers, "computer");
     console.debug("computerNumbers:")
     console.table(computerNumbers);
+
+    if (btnNextTurn.classList.contains('d-none')) {
+        btnNextTurn.classList.remove('d-none');
+    };
 });
 
-
-
-const btnNextTurn = document.getElementById('nextTurn');
 btnNextTurn.addEventListener('click', () => {
     advanceTurns();
 });
@@ -109,6 +117,8 @@ function checkForVictory() {
         console.debug("Numero di turni eseguiti:", extractedNumbers.length);
         console.debug("extractedNumbers in ordine di estrazione:", extractedNumbers);
         console.debug("extractedNumbers in ordine di grandezza:", extractedNumbers.sort((number1, number2) => number1 > number2 ? 1 : -1));
+
+        resetGameData();
     };
 };
 
@@ -122,7 +132,12 @@ function checkForVictory() {
 
 
 
-
+function resetGameData() {
+    userNumbers.length = 0;
+    computerNumbers.length = 0;
+    extractedNumbers.length = 0;
+    btnNextTurn.classList.add('d-none');
+}
 
 
 function getRandomNumber (max, min) {

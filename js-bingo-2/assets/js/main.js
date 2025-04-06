@@ -15,13 +15,15 @@ let playersCounter = 0;
 
 const btnAddPlayer = document.getElementById('addPlayer');
 const formAddPlayers = document.getElementById('addPlayers');
+const btnSetupGame = document.getElementById('setupGame');
 const btnStartGame = document.getElementById('startGame');
 const btnNextTurn = document.getElementById('nextTurn');
 
 
 
 btnAddPlayer.addEventListener('click', addPlayer);
-btnStartGame.addEventListener('click', startGame);
+btnSetupGame.addEventListener('click', setupGame);
+// btnStartGame.addEventListener('click', startGame);
 
 
 
@@ -47,13 +49,13 @@ function addPlayer () {
 
     formAddPlayers.appendChild(newPlayerInput);
 
-    if (btnStartGame.classList.contains('d-none')) {
-        btnStartGame.classList.remove('d-none');
+    if (btnSetupGame.classList.contains('d-none')) {
+        btnSetupGame.classList.remove('d-none');
     };
 };
 
 
-function startGame () {
+function setupGame () {
     const playerInputs = Array.prototype.slice.call(document.querySelectorAll('.playerInput'));
     console.debug("playerInputs", playerInputs);
 
@@ -92,6 +94,16 @@ function startGame () {
             players.push(newPlayer);
         }
         console.table(players);
+    } else {
+        const computerPlayer = players.find((player) => player.playerName === 'computer');
+        console.debug("computerPlayer", computerPlayer)
+        if (computerPlayer !== undefined) {
+            const isRemoveComputer = confirm('Il computer è presente come giocatore, vuoi rimuoverlo?');
+            if (isRemoveComputer === true) {
+                players.splice(players.indexOf(computerPlayer), 1);
+            }
+            console.table(players);
+        };
     };
 };
 
@@ -124,6 +136,7 @@ function generatePlayerNumbers(player) {
             player.playerNumbers.push(numberToAdd);
         };
     };
+    player.playerNumbers.sort((number1, number2) => number1 > number2 ? 1 : -1);
 }
 
 

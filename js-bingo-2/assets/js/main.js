@@ -219,6 +219,7 @@ function checkForVictory() {
         });
 
         console.warn("RISULTATI:");
+        console.table(players);
         console.debug("Numero di turni eseguiti:", extractedNumbers.length);
         console.debug("extractedNumbers in ordine di estrazione:", extractedNumbers);
         console.debug("extractedNumbers in ordine di grandezza:", extractedNumbers.sort((number1, number2) => number1 > number2 ? 1 : -1));

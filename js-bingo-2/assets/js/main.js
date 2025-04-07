@@ -33,10 +33,10 @@ btnNextTurn.addEventListener('click', advanceTurns);
 
 
 function addPlayer () {
-    const newPlayer = {
-        playerName: "",
-        playerNumbers: []
-    };
+    // const newPlayer = {
+    //     playerName: "",
+    //     playerNumbers: []
+    // };
     // console.debug("newPlayer", newPlayer);
     // console.debug("players", players);
     
@@ -223,13 +223,18 @@ function checkForVictory() {
         console.debug("extractedNumbers in ordine di estrazione:", extractedNumbers);
         console.debug("extractedNumbers in ordine di grandezza:", extractedNumbers.sort((number1, number2) => number1 > number2 ? 1 : -1));
 
+        // NON DOVREBBE MAI ESSERE 0
+        if (extractedNumbers.length !== 0) {
+            extractedNumbers.length = 0;
+        };
+
         if (!btnNextTurn.classList.contains('d-none')) {
             btnNextTurn.classList.add('d-none');
         };
         showGameSetup();
     };
 
-    // * TODO (3)
+    // * TODO (#3)
     // * INSERIRE UN PULSANTE PER RESETTARE COMPLETAMENTE ED UNO PER INIZIARE UNA NUOVA PARTITA MANTENENDO GLI STESSI GIOCATORI
     // resetGameData();
 };
